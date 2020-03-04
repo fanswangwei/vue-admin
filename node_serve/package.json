@@ -1,0 +1,13 @@
+{
+    "name": "node_serve",
+    "version": "1.0.0",
+    "description": "node管理后台",
+    "main": "serve.js",
+    "scripts": {
+        "start": "node serve.js"
+    },
+    "devDependencies": {},
+    "dependencies": {
+        "koa": "^2.11.0"
+    }
+}
