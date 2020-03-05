@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Nav from "@/components/nav";
+import lostPage from "@/views/404";
 import WEB from "./modules/web";
 import NODE from "./modules/node";
 Vue.use(VueRouter)
@@ -30,9 +31,13 @@ const routers = new VueRouter({
       redirect: '/web' // 重定向
     },
     {
-      name: "404",
+      name: "default_404",
       path: '/404',
-      component: Nav
+      component: lostPage
+    // },
+    // {
+    //   path: "*",
+    //   redirect: "/404"
     }
   ],
   scrollBehavior(to, from, savedPosition) {

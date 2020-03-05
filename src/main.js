@@ -7,7 +7,15 @@ import "@/scss/element-variables.scss";
 import "@/scss/base.scss";
 
 Vue.use(Element)
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.length === 0) {  // 如果未匹配到路由
+    console.log(to.matched);
+    // from.path ? next({ path: from.path }) : next({ name: 'default_404' });   //如果上级也未匹配到路由则跳转404，如果上级能匹配到则转上级路由
+    next({ name: 'default_404' });   //如果未匹配到路由则跳转404
+  } else {
+    next();    //如果匹配到正确跳转
+  }
+})
 new Vue({
   el: '#app',
   router: router,
