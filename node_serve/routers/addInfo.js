@@ -10,8 +10,8 @@ router.get('/', async (ctx, next) => {
 //路由
 router.post('/api/addUserInfo', async (ctx, next) => {
   var param = ctx.req;
-
-  if (!param.file || !param.file.originalname) {
+  console.log(ctx.req);
+  if (param) {
     console.error("ERROR: ");
     ctx.body = {
       code: 501,
@@ -28,6 +28,8 @@ router.post('/api/addUserInfo', async (ctx, next) => {
       height: 'String',
       weight: 'String',
       birth: 'String',
+      phone: 'Number',
+      email: 'String',
       createdTime: new Date(),
       remak: 'String'
     }

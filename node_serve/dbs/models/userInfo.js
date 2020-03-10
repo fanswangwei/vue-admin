@@ -7,6 +7,8 @@ let userInfo = new mongoose.Schema({
     height: String,
     weight: String,
     birth: String,
+    phone: Number,
+    email: String,
     createdTime: Date,
     remak: String
 })

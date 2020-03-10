@@ -103,7 +103,7 @@ export default {
       height: 100%;
       width: calc(100% - 180px);
       padding: 20px;
-      background: #f5f5f5;;
+      background: #fefefe;;
     }
   }
 }
