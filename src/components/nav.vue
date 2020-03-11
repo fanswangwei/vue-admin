@@ -46,10 +46,10 @@ export default {
       }else {
         if(this.navList.length > 0){
           defaultNav = this.navList[0].name
+        }else {
+          
         }
       }
-      console.log(this.$route.name === defaultNav);
-      console.log(defaultNav);
       return defaultNav;
     }
   },

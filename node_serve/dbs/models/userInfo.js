@@ -10,7 +10,7 @@ let userInfo = new mongoose.Schema({
     phone: Number,
     email: String,
     createdTime: Date,
-    remak: String
+    remark: String
 })
 // 连接数据库vue表
 module.exports = mongoose.model('userInfo', userInfo, 'userInfo')

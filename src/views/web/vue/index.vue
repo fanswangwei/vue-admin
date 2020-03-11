@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <h3>{{title}}</h3>
     <el-form
       :model="userInfo"
       ref="userInfoForm"
@@ -30,7 +31,12 @@
         </el-input>
       </el-form-item>
       <el-form-item size="small" label="生日" prop="birth">
-        <el-date-picker type="date" v-model="userInfo.birth" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+        <el-date-picker
+          type="date"
+          v-model="userInfo.birth"
+          value-format="yyyy-MM-dd"
+          placeholder="选择日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item size="small" label="手机" prop="phone">
         <el-input v-model="userInfo.phone" auto-complete="off"></el-input>
@@ -38,12 +44,12 @@
       <el-form-item size="small" label="邮箱" prop="email">
         <el-input v-model="userInfo.email" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item size="small" label="备注" prop="remak">
+      <el-form-item size="small" label="备注" prop="remark">
         <el-input
           type="textarea"
           rows="3"
           resize="none"
-          v-model="userInfo.remak"
+          v-model="userInfo.remark"
           auto-complete="off"
         ></el-input>
       </el-form-item>
@@ -55,11 +61,18 @@
   </div>
 </template>
 <script>
-import { addUserInfo } from "@/api/api";
+import { addUserInfo, getUserInfo, updateUserInfo } from "@/api/api";
+import {
+  checkNumber,
+  checkEmail,
+  checkPhone,
+  checkName
+} from "@/util/validator.js";
 export default {
   name: "",
   data() {
     return {
+      title: '新增信息',
       userInfo: {
         name: "",
         age: "",
@@ -69,17 +82,44 @@ export default {
         birth: "",
         phone: "",
         email: "",
-        remak: ""
+        remark: ""
       },
       userInfoRules: {
         name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { min: 2, max: 10, message: "长度在 2 到 10 个字符", trigger: "blur" }
+          {
+            required: true,
+            validator: checkName,
+            trigger: "blur"
+          }
         ],
-        age: [{ required: true, message: "年龄不能为空" }],
-        sex: [{ required: true, message: "请选择性别" }],
-        height: [{ required: true, message: "身高不能为空" }],
-        weight: [{ required: true, message: "体重不能为空" }],
+        age: [
+          {
+            required: true,
+            message: "年龄不能为空"
+          },
+          { validator: checkNumber, trigger: "blur" }
+        ],
+        sex: [{ required: true, message: "请选择性别", trigger: "blur" }],
+        height: [
+          {
+            required: true,
+            message: "身高不能为空"
+          },
+          {
+            validator: checkNumber,
+            trigger: "blur"
+          }
+        ],
+        weight: [
+          {
+            required: true,
+            message: "体重不能为空"
+          },
+          {
+            validator: checkNumber,
+            trigger: "blur"
+          }
+        ],
         birth: [
           {
             type: "string",
@@ -88,37 +128,78 @@ export default {
             trigger: "change"
           }
         ],
-        phone: [{ required: true, message: "手机不能为空" }],
-        email: [
-          { required: true, message: "请输入邮箱地址", trigger: "blur" },
+        phone: [
           {
-            type: "email",
-            message: "请输入正确的邮箱地址",
-            trigger: "blur,change"
+            required: true,
+            message: "手机不能为空"
+          },
+          {
+            validator: checkPhone,
+            trigger: "blur"
           }
         ],
-        remak: []
+        email: [
+          {
+            required: true,
+            message: "请输入邮箱地址"
+          },
+          {
+            trigger: "blur",
+            validator: checkEmail
+          }
+        ],
+        remark: []
       }
     };
   },
   created() {
-    // this.testHealth();
+    if(this.$route && this.$route.params && this.$route.params.userInfoID){
+      let userInfoID = this.$route.params.userInfoID;
+      this.title = "编辑信息"
+      this.getUserInfo({userInfoID})
+    }
   },
   methods: {
+    addUserInfo() {
+      // console.log(this.userInfo);
+      addUserInfo(this.userInfo).then(res => {
+        if(res.code === 200){
+          this.resetForm('userInfoForm')
+        }
+      });
+    },
+    updateUserInfo(){
+      updateUserInfo(this.userInfo).then( res => {
+        if(res.code === 200){
+          this.resetForm('userInfoForm');
+          this.$router.push({path: '/react'})
+        }
+      })
+    },
+    getUserInfo(params){
+      getUserInfo(params).then( res => {
+        if(res.code === 200){
+          let userInfo = this.userInfo;
+          for(let item in userInfo){
+            userInfo[item] = res.data[0][item]
+          }
+          this.userInfo = userInfo;
+          this.userInfo._id = res.data[0]._id;
+        }
+      })
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.addUserInfo();
+          if(this.$route && this.$route.params && this.$route.params.userInfoID){
+            this.updateUserInfo();
+          }else{
+            this.addUserInfo();
+          }
         } else {
           console.log("error submit!!");
           return false;
         }
-      });
-    },
-    addUserInfo() {
-      console.log(this.userInfo);
-      addUserInfo(this.userInfo).then(res => {
-        console.log(res);
       });
     },
     resetForm(formName) {
@@ -129,6 +210,11 @@ export default {
 </script>
 <style lang='scss' scoped>
 .wrapper {
+  h3 {
+    font-weight: normal;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
   .el-form {
     width: 40%;
   }

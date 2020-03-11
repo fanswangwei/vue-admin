@@ -7,19 +7,19 @@ const app = new Koa();
 const router = new Router();
 
 //操作数据库,引入模块
-// const mongoose = require('mongoose');
-// const config = require('./config')
-// //mongoose,连接数据库
-// mongoose.connect(config.DB_CONN_STR, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }, function (err, db) {
-//     if (err) {
-//         console.log('mongo error:', err);
-//         return;
-//     }
-//     console.log("mongo success!");
-// })
+const mongoose = require('mongoose');
+const config = require('./config')
+//mongoose,连接数据库
+mongoose.connect(config.DB_CONN_STR, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}, function (err, db) {
+    if (err) {
+        console.log('mongo error:', err);
+        return;
+    }
+    console.log("mongo success!");
+})
 
 // 设置跨域
 app.use(cors())
@@ -38,6 +38,15 @@ app.use(async (ctx, next) => {
 
 const addUser = require('./routers/addInfo');
 app.use(addUser.routes(), router.allowedMethods());
+
+const searchUser = require('./routers/searchInfo');
+app.use(searchUser.routes(), router.allowedMethods());
+
+const updateInfo = require('./routers/updateInfo');
+app.use(updateInfo.routes(), router.allowedMethods());
+
+const deleteInfo = require('./routers/deleteInfo');
+app.use(deleteInfo.routes(), router.allowedMethods());
 
 app.listen(3000, () => {
     console.log('Server is running at port 3000...')
