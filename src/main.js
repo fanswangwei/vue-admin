@@ -5,8 +5,12 @@ import router from '@/router'
 import "element-ui/lib/theme-chalk/index.css";
 import "@/scss/element-variables.scss";
 import "@/scss/base.scss";
-
 Vue.use(Element)
+
+// 自定义组件
+import WwTable from "@/components/wwTable";
+Vue.use(WwTable)
+
 router.beforeEach((to, from, next) => {
   if (to.matched.length === 0) {  // 如果未匹配到路由
     console.log(to.matched);

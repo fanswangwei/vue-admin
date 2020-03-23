@@ -12,7 +12,9 @@
         </el-menu>
       </div>
       <div class="main">
-        <router-view></router-view>
+        <div class="content">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -102,8 +104,11 @@ export default {
       margin-left: 180px;
       height: 100%;
       width: calc(100% - 180px);
-      padding: 20px;
-      background: #fefefe;;
+      overflow: auto;
+      .content {
+        background: #fefefe;
+        padding: 20px;
+      }
     }
   }
 }

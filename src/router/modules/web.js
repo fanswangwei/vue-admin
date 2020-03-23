@@ -11,5 +11,11 @@ export default [
     path: '/react',
     meta: { parent: 'web', title: 'react' },
     component: resolve => require(['@/views/web/react'], resolve)
+  },
+  {
+    name: 'testTable',
+    path: '/testTable',
+    meta: { parent: 'web', title: 'testTable' },
+    component: resolve => require(['@/views/web/testTable'], resolve)
   }
 ]

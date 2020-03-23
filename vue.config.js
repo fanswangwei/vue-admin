@@ -42,5 +42,6 @@ module.exports = {
         hot: true,
         open: true,
         proxy: ""
-    }
+    },
+    lintOnSave: false
 };
