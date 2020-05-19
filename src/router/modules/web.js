@@ -11,11 +11,11 @@ export default [
     path: '/react',
     meta: { parent: 'web', title: 'react' },
     component: resolve => require(['@/views/web/react'], resolve)
-  // },
-  // {
-  //   name: 'tensorflowJS',
-  //   path: '/tensorflowJS',
-  //   meta: { parent: 'web', title: 'tensorflowJS' },
-  //   component: resolve => require(['@/views/web/tensorflowJS'], resolve)
+  },
+  {
+    name: 'tensorflowJS',
+    path: '/tensorflowJS',
+    meta: { parent: 'web', title: 'tensorflowJS' },
+    component: resolve => require(['@/views/web/tensorflowJS'], resolve)
   }
 ]
