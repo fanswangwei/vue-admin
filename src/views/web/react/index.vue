@@ -41,18 +41,18 @@ export default {
   },
   methods: {
     getUserInfo() {
-      getUserInfo().then(res => {
-        if (res.code === 200) {
-          this.userInfoList = res.data;
-        }
-      });
+      // getUserInfo().then(res => {
+      //   if (res.code === 200) {
+      //     this.userInfoList = res.data;
+      //   }
+      // });
     },
     deleteUserInfo(scope) {
-      deleteUserInfo({userInfoID: scope.row._id}).then( res => {
-        if(res.code === 200){
-          this.getUserInfo();
-        }
-      })
+      // deleteUserInfo({userInfoID: scope.row._id}).then( res => {
+      //   if(res.code === 200){
+      //     this.getUserInfo();
+      //   }
+      // })
     }
   }
 };

@@ -36,7 +36,7 @@ module.exports = {
         disableHostCheck: true,
         contentBase: path.join(__dirname, "dist"),
         compress: true,
-        host: "dev.ww.com",  //如果想用这个需要配置host 因为webpack在启动的时候 会验证一次连接,所以配置的这个域名或者ip需要能够ping通
+        host: "127.0.0.1",  //如果想用这个需要配置host 因为webpack在启动的时候 会验证一次连接,所以配置的这个域名或者ip需要能够ping通
         // host: "0.0.0.0",
         port: 8000,
         hot: true,

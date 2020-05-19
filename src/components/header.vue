@@ -17,6 +17,10 @@
           <i class="el-icon-setting"></i>
           <span slot="title">后端</span>
         </el-menu-item>
+        <el-menu-item index="tensorflow" :route="{name: 'tensorflow'}">
+          <i class="el-icon-star-off"></i>
+          <span slot="title">tensorflow</span>
+        </el-menu-item>
       </el-menu>
       <div class="center">
         <el-dropdown>

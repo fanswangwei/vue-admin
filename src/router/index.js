@@ -4,6 +4,7 @@ import Nav from "@/components/nav";
 import lostPage from "@/views/404";
 import WEB from "./modules/web";
 import NODE from "./modules/node";
+import TensorFlow from "./modules/tensorflow";
 Vue.use(VueRouter)
 
 const routers = new VueRouter({
@@ -24,6 +25,14 @@ const routers = new VueRouter({
       redirect: '/koa',
       component: Nav,
       children: [...NODE]
+    },
+    {
+      name: "tensorflow",
+      path: "/tensorflow",
+      meta: { title: "tensorflow" },
+      redirect: '/tensorflow',
+      component: Nav,
+      children: [...TensorFlow]
     },
     {
       name: "web",
