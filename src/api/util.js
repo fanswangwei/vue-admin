@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://127.0.0.1:3001";
+axios.defaults.baseURL = "http://127.0.0.1:4004";
 axios.defaults.headers.common["Content-Type"] = "application/json;charset=utf8";
 
 // 请求拦截器

@@ -20,3 +20,7 @@ export function updateUserInfo(json) {
 export function deleteUserInfo(json) {
   return  postData("/api/deleteUserInfo", json)
 }
+// 获取城市信息
+export function cityQuery(json) {
+  return  getData("/city/query", json)
+}

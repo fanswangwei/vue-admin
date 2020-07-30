@@ -17,5 +17,11 @@ export default [
     path: '/tensorflowJS',
     meta: { parent: 'web', title: 'tensorflowJS' },
     component: resolve => require(['@/views/web/tensorflowJS'], resolve)
+  },
+  {
+    name: 'testApi',
+    path: '/testApi',
+    meta: { parent: 'web', title: 'testApi' },
+    component: resolve => require(['@/views/web/testApi'], resolve)
   }
 ]
